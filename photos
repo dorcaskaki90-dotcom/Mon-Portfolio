@@ -1,0 +1,745 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      KENFACK NGOUNI DORCAS | Graphiste, Web Designer & Community Manager
+    </title>
+    <meta
+      name="description"
+      content="Portfolio de graphiste freelance spécialisé en identité visuelle, typographie, branding et direction artistique."
+    />
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="icon" type="image/png" sizes="16x16" href="nouveau logo.png" />
+
+    <style>
+      :root {
+        --color-bg: #0f0f0f;
+        --color-text: #f0f0f0;
+        --color-accent: #ff3366;
+        --color-secondary: #00d4ff;
+        --transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      body {
+        background: var(--color-bg);
+        color: var(--color-text);
+        font-family: "Inter", sans-serif;
+        line-height: 1.6;
+        overflow-x: hidden;
+      }
+
+      h1,
+      h2,
+      h3 {
+        font-family: "Playfair Display", serif;
+        font-weight: 600;
+      }
+
+      header {
+        height: 100vh;
+        min-height: 700px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        padding: 2rem;
+        text-align: center;
+      }
+
+      .hero-content {
+        max-width: 900px;
+        z-index: 2;
+      }
+
+      .hero-title {
+        font-size: clamp(3.5rem, 8vw, 7rem);
+        line-height: 0.9;
+        margin-bottom: 1.5rem;
+        opacity: 0;
+        transform: translateY(40px);
+        transition: var(--transition);
+      }
+      .hero-title.visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      .hero-subtitle {
+        font-size: clamp(1.3rem, 4vw, 2rem);
+        color: var(--color-accent);
+        margin-bottom: 2rem;
+        opacity: 0;
+        transform: translateY(40px);
+        transition: var(--transition) 0.2s;
+      }
+      .hero-subtitle.visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      .btn {
+        display: inline-block;
+        padding: 1rem 2.2rem;
+        background: transparent;
+        border: 2px solid var(--color-accent);
+        color: var(--color-accent);
+        text-decoration: none;
+        font-weight: 500;
+        border-radius: 50px;
+        transition: var(--transition);
+        margin: 0 0.8rem;
+      }
+      .btn:hover {
+        background: var(--color-accent);
+        color: white;
+        transform: translateY(-4px);
+        box-shadow: 0 10px 30px rgba(255, 51, 102, 0.3);
+      }
+
+      nav {
+        position: fixed;
+        top: 0;
+        width: 100%;
+        padding: 1.5rem 5%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        z-index: 1000;
+        transition: background 0.4s;
+      }
+      nav.scrolled {
+        background: rgba(15, 15, 15, 0.85);
+        backdrop-filter: blur(10px);
+      }
+
+      .logo {
+        font-size: 1.6rem;
+        font-weight: 700;
+        color: var(--color-accent);
+      }
+
+      .nav-links {
+        list-style: none;
+        display: flex;
+        gap: 2.5rem;
+      }
+      .nav-links a {
+        color: var(--color-text);
+        text-decoration: none;
+        font-weight: 500;
+        transition: var(--transition);
+      }
+      .nav-links a:hover {
+        color: var(--color-accent);
+      }
+
+      section {
+        padding: 10rem 5%;
+      }
+
+      h2 {
+        font-size: clamp(3rem, 6vw, 5.5rem);
+        text-align: center;
+        margin-bottom: 4rem;
+        color: rgba(255, 255, 255, 0.15);
+        position: relative;
+      }
+      h2 span {
+        color: var(--color-text);
+        display: block;
+      }
+
+      /* Section À propos */
+      #apropos {
+        background: #111;
+        text-align: center;
+      }
+
+      .about-container {
+        max-width: 1000px;
+        margin: 0 auto;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 4rem;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .about-photo {
+        width: 280px;
+        height: 280px;
+        border-radius: 50%;
+        object-fit: cover;
+        border: 5px solid var(--color-accent);
+        box-shadow: 0 15px 40px rgba(255, 51, 102, 0.3);
+        opacity: 0;
+        transform: scale(0.8);
+        transition: var(--transition);
+      }
+      .about-photo.visible {
+        opacity: 1;
+        transform: scale(1);
+      }
+
+      .about-text {
+        max-width: 500px;
+        text-align: left;
+      }
+      .about-text h2 {
+        font-size: 2.8rem;
+        margin-bottom: 1.2rem;
+      }
+      .about-text p {
+        margin-bottom: 1.5rem;
+        font-size: 1.1rem;
+      }
+
+      .contact-info {
+        margin-top: 2rem;
+        font-size: 1.1rem;
+      }
+      .contact-info a {
+        color: var(--color-accent);
+        text-decoration: none;
+        transition: var(--transition);
+      }
+      .contact-info a:hover {
+        color: #fff;
+        text-decoration: underline;
+      }
+
+      /* Projets */
+      .projects-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+        gap: 3rem;
+        max-width: 1600px;
+        margin: 0 auto;
+      }
+
+      .project-card {
+        position: relative;
+        overflow: hidden;
+        border-radius: 12px;
+        opacity: 0;
+        transform: translateY(60px);
+        transition: var(--transition);
+      }
+      .project-card.visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      .project-img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.8s ease;
+      }
+      .project-card:hover .project-img {
+        transform: scale(1.08);
+      }
+
+      .project-overlay {
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(
+          to top,
+          rgba(0, 0, 0, 0.9) 0%,
+          transparent 50%
+        );
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        padding: 2.5rem;
+        opacity: 0;
+        transition: opacity 0.5s ease;
+      }
+      .project-card:hover .project-overlay {
+        opacity: 1;
+      }
+
+      .project-title {
+        font-size: 1.6rem;
+        margin-bottom: 0.5rem;
+      }
+      .project-category {
+        color: var(--color-accent);
+        font-size: 0.95rem;
+      }
+      input{
+         background-color: rgb(209, 209, 209);
+        color: rgb(146, 144, 144);
+        padding: 20px 15px;
+        border: none;
+        border-radius: 50px;
+        cursor: pointer;
+        width: 60%;
+        margin: 20px 300PX; 
+        size: 50px;
+      }
+      textarea{
+        background-color: rgb(209, 209, 209);
+        color: rgb(146, 144, 144);
+        padding: 20px 15px;
+        border: none;
+        border-radius: 50px;
+        cursor: pointer;
+        width: 60%;
+        margin: 20px 300PX; 
+        size: 50px;
+      }
+      
+.primary-button {
+    display: inline-block;
+    padding: 12px 32px;
+    background-color: #030303;
+    color: white;
+    text-decoration: none;
+    border-radius: 50px; 
+    font-weight: bold;
+    font-size: 16px;
+    border: 2px solid #ff3366;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 6px rgba(255, 51, 102, 0.3);
+    margin: 0 auto;
+    display: block;
+    width: fit-content; 
+}
+
+/* Animation au survol */
+.primary-button:hover {
+    background-color: #ff3366;
+    transform: translateY(-3px); /* Effet de "lévitation" */
+    box-shadow: 0 6px 12px rgba(255, 51, 102, 0.3);
+}
+
+/* Animation de clic */
+.primary-button:active {
+    transform: translateY(1px);
+    box-shadow: 0 2px 4px rgba(255, 51, 102, 0.3);
+}
+
+/* Effet de vague */
+.primary-button::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 5px;
+    height: 5px;
+    background: rgba(255, 51, 102, 0.3);
+    opacity: 0;
+    border-radius: 100%;
+    transform: scale(1, 1) translate(-50%, -50%);
+    transform-origin: 50% 50%;
+}
+
+.primary-button:focus:not(:active)::after {
+    animation: ripple 0.6s ease-out;
+}
+/* Conteneur pour l'arrière-plan de la popup */
+.popup-container {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Style de la popup */
+.popup {
+    background-color: white;
+    width: 400px;
+    padding: 30px;
+    border-radius: 6px;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.popup img {
+    width: 60px;
+    height: 60px;
+    margin-bottom: 20px;
+}
+
+.popup h2 {
+    margin-bottom: 15px;
+    color: #333;
+}
+
+.popup p {
+    color: #666;
+    margin-bottom: 25px;
+}
+
+.popup button {
+    background-color: #ff3366;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s;
+}
+
+.popup button:hover {
+    background-color: #ff3366;
+}
+
+@keyframes ripple {
+    0% {
+        transform: scale(0, 0);
+        opacity: 0.5;
+    }
+    100% {
+        transform: scale(20, 20);
+        opacity: 0;
+    }
+}
+
+
+      footer {
+        text-align: center;
+        padding: 4rem 2rem 2rem;
+        color: rgb(255, 255, 255);
+        font-size: 0.95rem;
+        box-shadow: 0 4px 6px rgba(255, 51, 102, 0.3);
+      }
+
+      @media (max-width: 768px) {
+        .nav-links {
+          display: none; 
+        }
+        .about-container {
+          flex-direction: column;
+        }
+      }
+      /* section contact */
+      .section {
+    padding: 50px 0;
+}
+
+    </style>
+  </head>
+  <body>
+    <!-- Navigation -->
+    <nav>
+      <div class="logo">KENFACK DORCAS</div>
+      <ul class="nav-links">
+        <li><a href="#projets">Projets</a></li>
+        <li><a href="#apropos">À propos</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+
+    <!-- Hero -->
+    <header>
+      <div class="hero-content">
+        <h1 class="hero-title">
+          Bonjour, je suis<br /><span>KENFACK NGOUNI DORCAS</span>
+        </h1>
+        <p class="hero-subtitle">
+          Graphiste • Web Designer • Community Manager
+        </p>
+        <div>
+          <a href="#projets" class="btn">Voir mes projets</a>
+          <a href="#apropos" class="btn">Me contacter</a>
+        </div>
+      </div>
+    </header>
+
+    <!-- À propos -->
+    <section id="apropos">
+      <div class="about-container">
+        <img src="Ma photo.jpg" alt="photo de profil" class="about-photo" />
+        <div class="about-text">
+          <h2>À propos de moi</h2>
+          <p>
+            Je suis Dorcas Kaki, une créative polyvalente alliant web design,
+            design graphique et community management. Mon expertise ?
+            Transformer des idées en expériences visuelles et digitales qui
+            marquent les esprits. Que ce soit pour un site web, une identité de
+            marque ou une stratégie de contenu, je mets ma passion et mon
+            savoir-faire au service de projets qui ont du sens. Découvre mon
+            univers et parlons de ton projet !
+          </p>
+          <p>
+            Avec plus de 2 années d’expérience, je collabore avec des marques,
+            agences et artistes pour donner vie à leurs projets.
+          </p>
+
+          <div class="contact-info">
+            <p>
+              <strong>Téléphone :</strong><br />
+              <a href="tel:+237698273398">+237698273398</a><br />
+              <a href="tel:+237679211083">+237679211083</a>
+            </p>
+            <p>
+              <strong>Facebook :</strong><br />
+              <a
+                href="https://www.facebook.com/share/1GF8ssbXBP/"
+                target="_blank"
+              >
+                facebook.com/K&K DESIGN.graphiste
+              </a>
+            </p>
+            <p>
+              <strong>Email :</strong><br />
+              <a href="mailto:votre@email.com">dorcaskaki90@gmail.com</a>
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Projets -->
+    <section id="projets">
+      <h2><span>Mes derniers projets</span></h2>
+
+      <div class="projects-grid">
+        <!-- Projet 1 -->
+        <div class="project-card">
+          <img src="location copie.jpg" alt="Projet 1" class="project-img" />
+          <div class="project-overlay">
+            <h3 class="project-title">LOCATION DE VOITURES</h3>
+            <p class="project-category">
+              Leur besoin : un flyer percutant, publié sur leurs différentes
+              pages, mettant en avant luxe, simplicité et accessibilité.
+            </p>
+          </div>
+        </div>
+
+        <!-- Projet 2 -->
+        <div class="project-card">
+          <img src="coiffure.jpg" alt="Projet 2" class="project-img" />
+          <div class="project-overlay">
+            <h3 class="project-title">FLYER POUR COIFFURE</h3>
+            <p class="project-category">
+              L’objectif était de : Mettre en avant les services phares :
+              coupes, colorations, soins capillaires, et coiffures
+              événementielles. Créer un visuel élégant et moderne, reflétant le
+              professionnalisme et la créativité du salon.
+            </p>
+          </div>
+        </div>
+
+        <!-- Projet 3 -->
+        <div class="project-card">
+          <img src="pedicure.jpg" alt="Projet 3" class="project-img" />
+          <div class="project-overlay">
+            <h3 class="project-title">FLYER POUR SERVICE DE PEDICURE</h3>
+            <p class="project-category">
+              L’objectif était de : Mettre en avant l’expertise du salon en
+              matière de soins des pieds (pédicure classique, spa, et soins
+              spécifiques). Promouvoir une offre spéciale : "Pédicure Spa +
+              Massage des pieds.
+            </p>
+          </div>
+        </div>
+        <!-- Projet 4 -->
+        <div class="project-card">
+          <img src="week.jpg" alt="Projet 1" class="project-img" />
+          <div class="project-overlay">
+            <h3 class="project-title">FLYER DE BON WEEKEND</h3>
+            <p class="project-category">
+              Créer un flyer attractif pour souhaiter un bon weekend au public
+              tout en renforçant la présence visuelle de la marque sur les
+              réseaux sociaux.
+            </p>
+          </div>
+        </div>
+
+        <!-- Projet 5 -->
+        <div class="project-card">
+          <img src="flyer.jpeg" alt="Projet 2" class="project-img" />
+          <div class="project-overlay">
+            <h3 class="project-title">
+              FORMATION EN DEVELOPPEMENT WEB & MOBILE
+            </h3>
+            <p class="project-category">
+              Leur objectif : attirer des inscriptions via un flyer à la fois
+              informatif et engageant, distribué en ligne et en physique
+              (salons, écoles, entreprises).
+            </p>
+          </div>
+        </div>
+
+        <!-- Projet 6 -->
+        <div class="project-card">
+          <img src="flyer2.jpeg" alt="Projet 3" class="project-img" />
+          <div class="project-overlay">
+            <h3 class="project-title">RECRUTEMENT FORMATEUR</h3>
+            <p class="project-category">
+              L’objectif du flyer était de toucher des professionnels du secteur
+              (développeurs, freelances, experts tech) en mettant en avant : Les
+              avantages de rejoindre l’équipe (flexibilité, environnement
+              stimulant, rémunération attractive).
+            </p>
+          </div>
+        </div>
+        <!-- Projet 7 -->
+        <div class="project-card">
+          <img src="poissonnerie.jpg" alt="Projet 1" class="project-img" />
+          <div class="project-overlay">
+            <h3 class="project-title">BRANDING CONGELATEUR</h3>
+            <p class="project-category">
+              Souhaitait moderniser l’image de ses congélateurs et portes pour :
+              Renforcer sa crédibilité auprès des clients (particuliers et
+              professionnels). Se différencier des concurrents grâce à un design
+              unique et mémorable.
+            </p>
+          </div>
+        </div>
+
+        <!-- Projet 8 -->
+        <div class="project-card">
+          <img src="tchad.jpg" alt="Projet 2" class="project-img" />
+          <div class="project-overlay">
+            <h3 class="project-title">LOGO POUR MARQUE DE T-SHIRT</h3>
+            <p class="project-category">
+              Ce projet visait à créer un logo emblématique pour une collection
+              de T-shirts célébrant la fierté tchadienne, en mettant en avant
+              des valeurs comme la force, la résilience et l’attachement à la
+              culture locale.
+            </p>
+          </div>
+        </div>
+
+        <!-- Projet 9 -->
+        <div class="project-card">
+          <img src="lc.jpg" alt="Projet 3" class="project-img" />
+          <div class="project-overlay">
+            <h3 class="project-title">LOGO POUR BAZAR</h3>
+            <p class="project-category">
+              LC Discount est une enseigne de magasins discount proposant une
+              large gamme de produits à prix réduits : alimentation, articles
+              ménagers, textiles, jouets, et bien plus. Le logo devait être
+              simple, mémorable et polyvalent, tout en intégrant le slogan
+              "House of Opportunities" pour renforcer leur message.
+            </p>
+          </div>
+        </div>
+
+      </div>
+    </section>
+      <section id="contact" class="section py-5">
+      <div class="container">
+        <h2 class="text-center mb-5 text-primary" style="font-size: 2.5rem">
+          Contact
+        </h2>
+        <div class="row justify-content-center">
+         <div class="input-box">
+      <input type="text" placeholder="nom" />
+    </div>
+    <div class="input-box">
+      <input type="text" placeholder="adresse email" />
+    </div>
+    <div class="input-box">
+      <input type="number" placeholder="numero de telephone" />
+    </div>
+    <div class="mb-3">
+                  <textarea
+                    class="form-control p-3 rounded responsive-textarea"
+                    placeholder="Message"
+                    rows="5"
+                    required
+                  ></textarea>
+                </div>
+   <!-- <a href="#contact" class="primary-button">Envoyer</a> -->
+    <button type="button" class="primary-button" onclick="openPopup()">Envoyer</button>
+
+  <!-- popup -->
+
+    <!-- Conteneur de la popup -->
+    <div class="popup-container" id="popupContainer">
+        <div class="popup">
+            <img src="tick.png" alt="Succès" />
+            <h2>Thank You!</h2>
+            <p>Merci d’avoir pris contact avec nous.</p>
+            <button onclick="closePopup()">OK</button>
+        </div>
+    </div>
+    
+
+
+
+
+    <!-- Footer -->
+    <footer>
+      <p>© 2025 KENFACK NGOUNI DORCAS — Tous droits réservés</p>
+    </footer>
+
+    <script>
+      // Animation au scroll
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("visible");
+            }
+          });
+        },
+        { threshold: 0.15 }
+      );
+
+      document
+        .querySelectorAll(
+          ".hero-title, .hero-subtitle, .project-card, .about-photo"
+        )
+        .forEach((el) => {
+          observer.observe(el);
+        });
+
+      // Navbar scroll
+      window.addEventListener("scroll", () => {
+        document
+          .querySelector("nav")
+          .classList.toggle("scrolled", window.scrollY > 100);
+      });
+
+      // Apparition hero
+      setTimeout(() => {
+        document.querySelector(".hero-title").classList.add("visible");
+        document.querySelector(".hero-subtitle").classList.add("visible");
+      }, 300);
+      // section popup
+      // Récupération du conteneur de la popup
+const popupContainer = document.getElementById("popupContainer");
+
+// Fonction pour ouvrir la popup
+function openPopup() {
+    popupContainer.style.display = "flex";
+}
+
+// Fonction pour fermer la popup
+function closePopup() {
+    popupContainer.style.display = "none";
+}
+
+    </script>
+  </body>
+</html>
